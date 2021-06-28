@@ -3,6 +3,7 @@ package com.zaqueurodrigues.springmongo.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.zaqueurodrigues.springmongo.dto.UserDto;
 import com.zaqueurodrigues.springmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,14 @@ public class UserService {
 
 		return obj.orElseThrow(() -> new ObjectNotFoundException("User not exists!"));
 
+	}
+
+	public User insert(User obj){
+		return repo.insert(obj);
+	}
+
+	public User fromDto (UserDto objDto){
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 
 }
