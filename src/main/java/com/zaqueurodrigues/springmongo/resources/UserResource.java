@@ -23,7 +23,7 @@ public class UserResource {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDto>> findAll(){
-		List<User> list = service.findAl();
+		List<User> list = service.findAll();
 		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
@@ -44,5 +44,14 @@ public class UserResource {
 
 		return ResponseEntity.created(uri).build();
 	}
+
+	@RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id){
+		service.delete(id);
+
+		return ResponseEntity.noContent().build();
+	}
+
+
 
 }
