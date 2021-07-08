@@ -6,6 +6,7 @@ import java.util.TimeZone;
 
 import com.zaqueurodrigues.springmongo.domain.Post;
 import com.zaqueurodrigues.springmongo.dto.AuthorDto;
+import com.zaqueurodrigues.springmongo.dto.CommentDto;
 import com.zaqueurodrigues.springmongo.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,6 +41,12 @@ public class Instantiation implements CommandLineRunner {
 
 		Post post1 = new Post(null, sdf.parse("03/11/2020"), "Partiu viagem!", "Vou viajar para a Bahia", new AuthorDto(zaqueu));
 		Post post2 = new Post(null, sdf.parse("05/05/2019"), "Good Morning!", "Hi guys, how are u?", new AuthorDto(maria));
+
+		CommentDto c1 = new CommentDto("Boa viagem amigo!", sdf.parse("03/11/2020"),new AuthorDto(maria));
+		CommentDto c2= new CommentDto("Hello my friend!", sdf.parse("05/05/2019"),new AuthorDto(zaqueu));
+
+		post1.getComments().add(c1);
+		post2.getComments().add(c2);
 
 		postRepository.saveAll(Arrays.asList(post1, post2));
 
