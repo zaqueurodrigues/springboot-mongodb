@@ -24,7 +24,7 @@ public class UserResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDto>> findAll(){
 		List<User> list = service.findAll();
-		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
+		List<UserDto> listDto = list.stream().map(UserDto::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 
