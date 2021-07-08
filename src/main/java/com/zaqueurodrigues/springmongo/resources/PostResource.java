@@ -3,6 +3,7 @@ package com.zaqueurodrigues.springmongo.resources;
 import com.zaqueurodrigues.springmongo.domain.Post;
 import com.zaqueurodrigues.springmongo.domain.User;
 import com.zaqueurodrigues.springmongo.dto.UserDto;
+import com.zaqueurodrigues.springmongo.resources.util.URL;
 import com.zaqueurodrigues.springmongo.services.PostService;
 import com.zaqueurodrigues.springmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,15 @@ public class PostResource {
 		Post obj = service.findByID(id);
 
 		return ResponseEntity.ok().body(obj);
+	}
+
+	@RequestMapping(value = "/textsearch", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam (value = "text", defaultValue = "") String text){
+		text = URL.decodeParam(text);
+
+		List<Post> list = service.findByTitle(text);
+
+		return ResponseEntity.ok().body(list);
 	}
 
 }
